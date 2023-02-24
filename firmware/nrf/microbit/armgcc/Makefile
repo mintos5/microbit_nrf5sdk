@@ -28,6 +28,7 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/libraries/util \
   $(SDK_ROOT)/components/toolchain \
   $(SDK_ROOT)/components/boards \
+  $(SDK_ROOT)/components/libraries/delay \
   $(SDK_ROOT)/modules/nrfx/drivers/include \
   $(SDK_ROOT)/components/toolchain/cmsis/include \
   $(SDK_ROOT)/modules/nrfx/hal \

@@ -7,7 +7,8 @@ NRF5_SDK_URL      = https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v$(NRF5_S
 
 all: subdirs | $(NRF5_SDK_ROOT)
 
-SUBDIRS = firmware/nrf/microbit/armgcc/
+SUBDIRS = firmware/nrf/blefriend32/armgcc/ \
+		  firmware/nrf/microbit/armgcc/
 
 SUBDIRS_CLEAN := $(addsuffix clean,$(SUBDIRS))
 

@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/michal/git_projects/raccoon/nRF5_SDK_15.3.0_59ac345/modules/nrfx/mdk"
+                "${workspaceFolder}/nRF5_SDK_15.3.0_59ac345/"
             ],
             "defines": [
                 "_DEBUG",
