@@ -1,19 +1,19 @@
 export GNU_INSTALL_ROOT ?=
 
-PROJECT_NAME     := uart_btfriend32
-TARGETS          := nrf51822_xxac
+PROJECT_NAME     := uart_pca10056
+TARGETS          := nrf52840_xxaa
 OUTPUT_DIRECTORY := _build
 
 SDK_ROOT ?= ../../../../nRF5_SDK_15.3.0_59ac345
 PROJ_DIR := ../../..
 
-$(OUTPUT_DIRECTORY)/nrf51822_xxac.out: \
-  LINKER_SCRIPT  := nrf51_xxac.ld
+$(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
+  LINKER_SCRIPT  := nrf52_xxaa.ld
 
 # Source files common to all targets
 SRC_FILES += \
-  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf51.S \
-  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf51.c \
+  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52840.S \
+  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52.c \
   $(SDK_ROOT)/components/boards/boards.c \
   $(PROJ_DIR)/nrf/main.c
 
@@ -45,34 +45,55 @@ OPT = -Os -ggdb3
 #OPT = -Og -ggdb3
 # Uncomment the line below to enable link time optimization
 #OPT += -flto
-
 GIT_VERSION := $(shell git describe --abbrev=4 --dirty --always --tags)
 
 # C flags common to all targets
 CFLAGS += $(OPT)
 CFLAGS += -DVERSION=\"$(GIT_VERSION)\"
-CFLAGS += -DNRF51
-CFLAGS += -DNRF51822
-CFLAGS += -DBOARD_CUSTOM
+# C flags common to all targets
+CFLAGS += -DNRF_LOG_USES_RTT=1
+CFLAGS += -DNRF52_PAN_12
+CFLAGS += -DNRF52_PAN_15
+CFLAGS += -DNRF52_PAN_58
+CFLAGS += -DNRF52_PAN_20
+CFLAGS += -DNRF52_PAN_54
+CFLAGS += -DNRF52
+CFLAGS += -DNRF52_PAN_51
+CFLAGS += -DNRF52_PAN_36
+CFLAGS += -DCONFIG_GPIO_AS_PINRESET
+CFLAGS += -DNRF52_PAN_64
+CFLAGS += -DNRF52_PAN_55
+CFLAGS += -DBOARD_PCA10056
+CFLAGS += -DNRF52_PAN_31
+CFLAGS += -DNRF52832
 CFLAGS += -DBSP_DEFINES_ONLY
-CFLAGS += -mcpu=cortex-m0
+CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mthumb -mabi=aapcs
 CFLAGS +=  -Wall -Werror 
-CFLAGS += -mfloat-abi=soft
-# make no unaligned access explicit
-CFLAGS += -mno-unaligned-access
+CFLAGS += -mno-unaligned-access 
+CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # keep every function in separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
 CFLAGS += -fno-builtin --short-enums 
-
 
 # C++ flags common to all targets
 CXXFLAGS += $(OPT)
 
 # Assembler flags common to all targets
-ASMFLAGS += -DNRF51
-ASMFLAGS += -DNRF51822
-ASMFLAGS += -DBOARD_CUSTOM
+ASMFLAGS += -DNRF52_PAN_12
+ASMFLAGS += -DNRF52_PAN_15
+ASMFLAGS += -DNRF52_PAN_58
+ASMFLAGS += -DNRF52_PAN_20
+ASMFLAGS += -DNRF52_PAN_54
+ASMFLAGS += -DNRF52
+ASMFLAGS += -DNRF52_PAN_51
+ASMFLAGS += -DNRF52_PAN_36
+ASMFLAGS += -DCONFIG_GPIO_AS_PINRESET
+ASMFLAGS += -DNRF52_PAN_64
+ASMFLAGS += -DNRF52_PAN_55
+ASMFLAGS += -DBOARD_PCA10056
+ASMFLAGS += -DNRF52_PAN_31
+ASMFLAGS += -DNRF52832
 ASMFLAGS += -DBSP_DEFINES_ONLY
 # causes warning if enabled, already set by Makefile.common
 # ASMFLAGS += -x assembler-with-cpp
@@ -80,21 +101,23 @@ ASMFLAGS += -DBSP_DEFINES_ONLY
 # Linker flags
 LDFLAGS += $(OPT)
 LDFLAGS += -mthumb -mabi=aapcs -L$(SDK_ROOT)/modules/nrfx/mdk -T$(LINKER_SCRIPT)
-LDFLAGS += -mcpu=cortex-m0
+LDFLAGS += -mcpu=cortex-m4
+LDFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # let linker to dump unused sections
 LDFLAGS += -Wl,--gc-sections
 # use newlib in nano version
 LDFLAGS += --specs=nano.specs -lc -lnosys
 
+
 .PHONY: $(TARGETS) default all clean help flash 
 
 # Default target - first one defined
-default: nrf51822_xxac
+default: nrf52840_xxaa
 
 # Print all targets that can be built
 help:
 	@echo following targets are available:
-	@echo 		nrf51822_xxac
+	@echo 		nrf52840_xxaa
 	@echo		nrfx_config - starting external tool for editing nrfx_config.h
 	@echo		flash      - flashing binary
 
@@ -107,13 +130,13 @@ $(foreach target, $(TARGETS), $(call define_target, $(target)))
 .PHONY: flash erase
 
 # Flash the program
-flash: $(OUTPUT_DIRECTORY)/nrf51822_xxac.hex
+flash: $(OUTPUT_DIRECTORY)/nrf52840_xxaa.hex
 	@echo Flashing: $<
-	nrfjprog --program $< -f nrf51 --sectorerase
-	nrfjprog --reset -f nrf51
+	nrfjprog --program $< -f nrf52 --sectorerase
+	nrfjprog --reset -f nrf52
 
 erase:
-	nrfjprog -f nrf51 --eraseall
+	nrfjprog -f nrf52 --eraseall
 
 SDK_CONFIG_FILE := ../config/nrfx_config.h
 CMSIS_CONFIG_TOOL := $(SDK_ROOT)/external_tools/cmsisconfig/CMSIS_Configuration_Wizard.jar

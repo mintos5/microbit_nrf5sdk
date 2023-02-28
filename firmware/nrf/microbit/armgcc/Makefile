@@ -12,6 +12,9 @@ $(OUTPUT_DIRECTORY)/nrf51822_xxaa.out: \
 
 # Source files common to all targets
 SRC_FILES += \
+  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf51.S \
+  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf51.c \
+  $(SDK_ROOT)/components/boards/boards.c \
   $(PROJ_DIR)/nrf/main.c
 
 # Include folders common to all targets

@@ -1,0 +1,32 @@
+{
+    "version":"0.2.0",
+    "configurations": [
+{
+    // The cwd for debug sessions is the top of my source tree.
+    "cwd" : "${workspaceRoot}",
+    // Path from {workspaceRoot} to your ELF file it might be placed elsewhere.
+    "executable": "firmware/nrf/microbit/armgcc/_build/nrf51822_xxaa.out",
+    // For humans in the VSCODE selection window give this a human friendly name
+    "name": "debug with OpenOCD",
+    // Added by me
+    "type": "cortex-debug",
+    "gdbPath" : "/usr/bin/gdb-multiarch",
+    // I this example the author develops on a Linux machine (Linux Server in a data center not locally on a laptop)
+    // The physical target (a Polarfire FPGA development board) is local to the laptop via USB
+    // And - OpenOCD is launched locally on the laptop via a batch file specific to the board & laptop or lab-computer
+    // Thus VS CODE does not launch OpenOCD, and the servertype is "external", not "openocd"
+    "servertype" : "external",  
+    // Need to tell GDB how to talk to openocd, often it is: "localhost:3333" or an IP address, ie: "10.23.42.220:3333" 
+    // GDB sees this as: "target remote HOSTNAME:PORT" - this needs to match your OpenOCD invocation.
+    // Change "mylaptop.mycompany.local" to a name that works for you (or hard code the IP address yuck but it works)
+    "gdbTarget": "localhost:3333",
+    // attach to a running target and halt (Handy if your code has hung)
+    // Hint: In the gdb prompt/console, type 3 commands: 
+    //   "load" to load your application, program counter will be at the reset vector.
+    //   "tbreak main" - sets a temporary breakpoint at main.
+    //   "continue" - target runs/executes-opcodes and should break at main.
+    //    Or - if you can step through (and debug) faulty startup code.
+    "request": "attach"
+ }
+    ]
+}

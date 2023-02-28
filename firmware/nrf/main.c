@@ -61,6 +61,13 @@ int main(void)
     /* Configure board. */
     bsp_board_init(BSP_INIT_LEDS);
 
+#ifdef MICROBIT_H
+    /* Configure COL9 on port 12 to output low/clear*/
+#define col9 12
+    nrf_gpio_cfg_output(col9);
+    nrf_gpio_pin_clear(col9);
+#endif
+
     /* Toggle LEDs. */
     while (true)
     {
