@@ -15,6 +15,15 @@ SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf51.S \
   $(SDK_ROOT)/modules/nrfx/mdk/system_nrf51.c \
   $(SDK_ROOT)/components/boards/boards.c \
+  $(SDK_ROOT)/components/libraries/util/app_error.c \
+  $(SDK_ROOT)/components/libraries/util/app_error_handler_gcc.c \
+  $(SDK_ROOT)/components/libraries/util/app_error_weak.c \
+  $(SDK_ROOT)/components/libraries/fifo/app_fifo.c \
+  $(SDK_ROOT)/components/libraries/uart/app_uart_fifo.c \
+  $(SDK_ROOT)/components/libraries/util/app_util_platform.c \
+  $(SDK_ROOT)/integration/nrfx/legacy/nrf_drv_uart.c \
+  $(SDK_ROOT)/modules/nrfx/drivers/src/prs/nrfx_prs.c \
+  $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uart.c \
   $(PROJ_DIR)/nrf/main.c
 
 # Include folders common to all targets
@@ -28,14 +37,21 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/drivers_nrf/nrf_soc_nosd \
   $(SDK_ROOT)/modules/nrfx/mdk \
   $(SDK_ROOT)/components/libraries/bsp \
+  $(SDK_ROOT)/components/libraries/uart \
+  $(SDK_ROOT)/components/libraries/log \
+  $(SDK_ROOT)/components/libraries/strerror \
+  $(SDK_ROOT)/components/libraries/fifo \
   $(SDK_ROOT)/components/libraries/util \
   $(SDK_ROOT)/components/toolchain \
   $(SDK_ROOT)/components/boards \
   $(SDK_ROOT)/components/libraries/delay \
+  $(SDK_ROOT)/components/libraries/experimental_section_vars \
+  $(SDK_ROOT)/components/libraries/log/src \
   $(SDK_ROOT)/modules/nrfx/drivers/include \
   $(SDK_ROOT)/components/toolchain/cmsis/include \
   $(SDK_ROOT)/modules/nrfx/hal \
   $(SDK_ROOT)/integration/nrfx \
+  $(SDK_ROOT)/integration/nrfx/legacy \
 
 # Libraries common to all targets
 LIB_FILES += \

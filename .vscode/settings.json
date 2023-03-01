@@ -2,6 +2,18 @@
     "files.associations": {
         "stdbool.h": "c",
         "nrf_delay.h": "c",
-        "boards.h": "c"
+        "boards.h": "c",
+        "bsp.h": "c",
+        "app_uart.h": "c",
+        "sdk_common.h": "c",
+        "app_fifo.h": "c",
+        "sdk_config.h": "c",
+        "nrf_log.h": "c",
+        "nrf_section.h": "c",
+        "nrf_log_internal.h": "c",
+        "nrf_strerror.h": "c",
+        "app_error.h": "c",
+        "nrf_drv_uart.h": "c",
+        "nrf_uart.h": "c"
     }
 }

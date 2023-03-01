@@ -1,6 +1,6 @@
-# Example Blinky App for Microbit
+# Example UART App for Microbit
 
-Example blinky app from Nordic's NRF5 SDK.
+Example UART app from Nordic's NRF5 SDK.
 Layout of project inspired from other github project:
 https://github.com/bluekitchen/raccoon
 
@@ -9,7 +9,6 @@ https://github.com/bluekitchen/raccoon
 Example was successfully tested/compiled on: 
  - Adafruit [Bluefruit LE Friend](https://www.adafruit.com/product/2267) with nRF51822
  - BBC micro:bit [BBC micro:bit](https://tech.microbit.org/hardware/1-3-revision/) with nRF51822
- - Nordic [nRF52840 DK (PCA10056)](https://www.nordicsemi.com/Software-and-Tools/Development-Kits/nRF52840-DK/GetStarted) with nRF52840
 
 ## Dependencies
 
